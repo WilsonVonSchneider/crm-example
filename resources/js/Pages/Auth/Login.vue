@@ -20,7 +20,7 @@ const form = useForm({
 
 const submit = () => {
     form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+        onFinish: () => form.reset('password')
     });
 };
 </script>
@@ -31,7 +31,7 @@ const submit = () => {
 
         <BreezeValidationErrors class="mb-4" />
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        <div v-if="status" :class="{ 'text-red-600': status.includes('Your account is inactive. Please contact support.') }" class="mb-4 font-medium text-sm">
             {{ status }}
         </div>
 

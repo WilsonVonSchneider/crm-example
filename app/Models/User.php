@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Account::class, 'owner_id');
     }
+
+    public function isActive()
+    {
+        return $this->active;
+    }
 }
