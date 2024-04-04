@@ -32,7 +32,7 @@ Route::middleware(['guest'])->group(function () {
 });
 
 // Define a route group with middleware 'auth'
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'check.activity'])->group(function () {
 
     // Dashboard route accessible only to authenticated users
     Route::get('/dashboard', function () {
