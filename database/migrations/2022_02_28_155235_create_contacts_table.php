@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('account_id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('phone');
             $table->string('position');
             $table->timestamps();
@@ -27,6 +27,8 @@ return new class extends Migration
                 ->references('id')
                 ->on('accounts')
                 ->onDelete('cascade');
+
+            $table->unique(['account_id', 'email']);
         });
     }
 
@@ -37,6 +39,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contacts');
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->dropUnique(['account_id', 'email']);
+        });   
     }
 };

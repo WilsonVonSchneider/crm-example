@@ -9,7 +9,20 @@ class Account extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'owner_id',
+        'address',
+        'town_city',
+        'country',
+        'post_code',
+        'phone'
+    ];
 
     public function owner()
     {
