@@ -1,8 +1,21 @@
 <script setup>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
-import {Link, Head} from '@inertiajs/vue3'
+import {Link, Head, useForm} from '@inertiajs/vue3'
 
-const form = '' // placeholder value
+const form = useForm({
+    name: '',
+    phone: '',
+    country: '',
+    address: '',
+    town_city: '',
+    post_code: ''
+});
+
+const submit = () => {
+    form.post(route('accounts.store'), {
+        onFinish: () => form.reset(),
+    });
+};
 </script>
 
 <template>
@@ -19,32 +32,26 @@ const form = '' // placeholder value
                         </ul>
                     </div>
                     <div class="mt-5 md:mt-0 md:col-span-2">
-                        <form>
+                        <form @submit.prevent="submit">
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                                     <input
                                         type="text"
                                         id="name"
+                                        v-model="form.name"
+                                        required
                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                     >
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="owner" class="block text-sm font-medium text-gray-700">Owner</label>
-                                    <select
-                                        id="owner"
-                                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    >
-                                        <option></option>
-                                    </select>
-                                </div>
+                                </div><br>
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
                                     <input
                                         type="tel"
                                         id="phone"
+                                        v-model="form.phone"
+                                        required
                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                     >
                                 </div>
@@ -54,6 +61,8 @@ const form = '' // placeholder value
                                     <input
                                         type="text"
                                         id="country"
+                                        v-model="form.country"
+                                        required
                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                     >
                                 </div>
@@ -63,24 +72,30 @@ const form = '' // placeholder value
                                     <input
                                         type="text"
                                         id="address"
+                                        v-model="form.address"
+                                        required
                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                     >
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                                    <label for="city" class="block text-sm font-medium text-gray-700">Town/City</label>
+                                    <label for="town_city" class="block text-sm font-medium text-gray-700">Town/City</label>
                                     <input
                                         type="text"
-                                        id="city"
+                                        id="town_city"
+                                        v-model="form.town_city"
+                                        required
                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                     >
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                    <label for="post-code" class="block text-sm font-medium text-gray-700">Post code</label>
+                                    <label for="post_code" class="block text-sm font-medium text-gray-700">Post code</label>
                                     <input
                                         type="text"
-                                        id="post-code"
+                                        id="post_code"
+                                        v-model="form.post_code"
+                                        required
                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                     >
                                 </div>
